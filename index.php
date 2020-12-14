@@ -36,7 +36,7 @@ $user2 = "Andi Gutmans";
             <a href="<?= $file ?>">
 
             <?php 
-            $file = str_replace("-", " - ", $file);
+            $file = str_replace("-", " ", $file);
             $file = ucwords($file);
             ?>
 
