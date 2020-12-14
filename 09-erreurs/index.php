@@ -25,6 +25,7 @@ $title = "09 - Niveaux d'erreurs";
     <p>Masque un message avec <code>@</code></p>
     <?php var_dump(@$fruit_b) ?>
 
+    
     <hr>
 
     <h2>Warning</h2>
