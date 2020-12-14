@@ -113,7 +113,114 @@ $title = "05 - Opérateurs";
 
     </section>
 
-    
+
+    <section>
+        <h2>Opérateurs de comparaison</h2>
+
+        <?php
+        $a = 42;
+        $b = 42;
+        ?>
+
+        <p>
+            Egalité (de valeur)<br>
+            Symbole : <code>==</code>
+            <pre>$a == $b</pre>
+            <?php var_dump( $a == $b ) ?>
+        </p>
+
+        <p>
+            Identique ( valeur ET type )<br>
+            Symbole : <code>===</code>
+            <pre>$a === $b</pre>
+            <?php var_dump( $a === $b ) ?>
+        </p>
+
+        <p>
+            Différent<br>
+            Symbole : <code>!=</code>
+            <pre>$a != $b</pre>
+            <?php var_dump( $a != $b ) ?>
+        </p>
+
+        <p>
+            Strictement Différent (valeur OU type)<br>
+            Symbole : <code>!==</code>
+            <pre>$a !== $b</pre>
+            <?php var_dump( $a !== $b ) ?>
+        </p>
+
+
+
+        <p>
+            Plus petit que<br>
+            Symbole : <code><</code>
+            <pre>$a < $b</pre>
+            <?php var_dump( $a < $b ) ?>
+        </p>
+
+        <p>
+            Plus grand que<br>
+            Symbole : <code>></code>
+            <pre>$a > $b</pre>
+            <?php var_dump( $a > $b ) ?>
+        </p>
+
+        <p>
+            Inférieur ou egale<br>
+            Symbole : <code><=</code>
+            <pre>$a <= $b</pre>
+            <?php var_dump( $a <= $b ) ?>
+        </p>
+
+        <p>
+            Supérieur ou égale<br>
+            Symbole : <code>>=</code>
+            <pre>$a >= $b</pre>
+            <?php var_dump( $a >= $b ) ?>
+        </p>
+    </section>
+
+
+    <section>
+        <h2>Opérateurs logiques</h2>
+
+        <p>
+            ET logique<br>
+            Symbole : <code>AND</code> <code>&&</code>
+            <pre>$a && $b</pre>
+            <pre>
+true && true = <?php var_dump( true && true ) ?>
+true && false = <?php var_dump( true && false ) ?>
+false && false = <?php var_dump( false && false ) ?>
+false && true = <?php var_dump( false && true ) ?>
+            </pre>
+        </p>
+
+        <p>
+            OU logique<br>
+            Symbole : <code>OR</code> <code>||</code>
+            <pre>$a || $b</pre>
+            <pre>
+true || true = <?php var_dump( true || true ) ?>
+true || false = <?php var_dump( true || false ) ?>
+false || false = <?php var_dump( false || false ) ?>
+false || true = <?php var_dump( false || true ) ?>
+            </pre>
+        </p>
+
+        <p>
+            OU eXclusif<br>
+            Symbole : <code>XOR</code>
+            <pre>$a XOR $b</pre>
+            <pre>
+true XOR true = <?php var_dump( true XOR true ) ?>
+true XOR false = <?php var_dump( true XOR false ) ?>
+false XOR false = <?php var_dump( false XOR false ) ?>
+false XOR true = <?php var_dump( false XOR true ) ?>
+            </pre>
+        </p>
+    </section>
     <hr>
 
     <a href="/">Retour</a>
