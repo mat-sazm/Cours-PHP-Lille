@@ -221,6 +221,24 @@ false XOR true = <?php var_dump( false XOR true ) ?>
             </pre>
         </p>
     </section>
+
+    <hr>
+<pre>
+    NULL : <?php var_dump( NULL );?>
+    "" : <?php var_dump( "" );?>
+    false : <?php var_dump( false );?>
+    0 : <?php var_dump( 0 );?>
+</pre>
+    <hr>
+<pre>
+    NULL == FALSE : <?php var_dump( NULL == FALSE );?>
+    NULL === FALSE : <?php var_dump( NULL === FALSE );?>
+    "" == FALSE : <?php var_dump( "" == FALSE );?>
+    "" === FALSE : <?php var_dump( "" === FALSE );?>
+    0 == FALSE : <?php var_dump( 0 == FALSE );?>
+    0 === FALSE : <?php var_dump( 0 === FALSE );?>
+</pre>
+
     <hr>
 
     <a href="/">Retour</a>
