@@ -21,5 +21,31 @@ $user2 = "Andi Gutmans";
 
     <p>PHP est repris par <?php echo $user1; ?> et <?= $user2; ?>.</p>
     <p>Aujourd'hui, PHP est édité par la société <?= substr($user1, 0, 2) ?><?= substr($user2, 1, 2) ?></p>
+
+    <hr>
+
+
+    <?php
+    $files = scandir("./");
+    ?>
+
+    <ul>
+        <?php foreach($files as $file): ?>
+        <?php if (is_dir($file) && preg_match("/^[0-9]{2}-.+$/", $file)): ?>
+        <li>
+            <a href="<?= $file ?>">
+
+            <?php 
+            $file = str_replace("-", " - ", $file);
+            $file = ucwords($file);
+            ?>
+
+            <?= $file ?>
+            </a>
+        </li>
+        <?php endif; ?>
+        <?php endforeach; ?>
+    </ul>
+
 </body>
 </html>
