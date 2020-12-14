@@ -18,7 +18,37 @@ $title = "01 - Commentaires";
 
     <?php
     // Ceci est un commentaires sur une ligne
-    // MDP: 123456
+    // Ne pas mettre de données sensible : (ex:  MDP: 123456)
+    ?>
+
+    <h2>Commentaire Multilignes</h2>
+
+    <?php 
+    /* ceci 
+    est 
+    un
+    commentaire
+    multilignes */
+    ?>
+
+    <h2>Commentaire de documentaion</h2>
+
+    <?php
+    /**
+     * Ceci est un commentaire de documentation
+     */
+
+    /**
+     * Faire une addition
+     *
+     * @param integer $a
+     * @param integer $b
+     * @return integer
+     */
+    function addition(int $a, int $b=0): int
+    {
+        return $a + $b;
+    }
     ?>
 
     <a href="/">Retour</a>
