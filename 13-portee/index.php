@@ -5,6 +5,8 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+include "config.php";
+
 $title = "13 - Portée";
 ?>
 <!DOCTYPE html>
@@ -52,6 +54,7 @@ $title = "13 - Portée";
     <?= fnc_b() ?><br>
     <?= $var_b ?><br>
     <?= $var_c ?><br>
+    <?= $passwd ?><br>
 
     <hr>
     
