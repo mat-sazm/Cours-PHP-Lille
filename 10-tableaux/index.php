@@ -17,6 +17,14 @@ $title = "10 - Tableaux";
 <body>
     <h1><?= $title ?></h1>
 
+    <h2>Creation d'un tableau</h2>
+
+    <pre>$monTableau = [];</pre>
+
+    <?php
+    $monTableau = [];
+    ?>
+
     <hr>
 
     <a href="/">Retour</a>
