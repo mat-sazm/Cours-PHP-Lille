@@ -1,0 +1,56 @@
+[
+    {
+        "label": "Home",
+        "link": "#"
+    },
+    {
+        "label": "Services",
+        "link": "#",
+        "children": [
+            {
+                "label": "Service 3",
+                "link": "#"
+            },
+            {
+                "label": "Service 2",
+                "link": "#"
+            },
+            {
+                "label": "Service 1",
+                "link": "#",
+                "children": [
+                    {
+                        "label": "Service 3-A",
+                        "link": "#"
+                    },
+                    {
+                        "label": "Service 3-B",
+                        "link": "#"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "label": "Products",
+        "link": "#",
+        "children": [
+            {
+                "label": "Product 3",
+                "link": "#"
+            },
+            {
+                "label": "Product 2",
+                "link": "#"
+            },
+            {
+                "label": "Product 1",
+                "link": "#"
+            }
+        ]
+    },
+    {
+        "label": "Contact",
+        "link": "#"
+    }
+]
