@@ -40,6 +40,9 @@
     "XXX XXX dit: Je suis XXX, je protège XXX et ses habitants !"
     </pre>
 
+    
+    <h2>Affichage</h2>
+
     <p>Héros 1 : xxxxx</p>
     <p>Héros 2 : xxxxx</p>
     <p>Héros 3 : xxxxx</p>
