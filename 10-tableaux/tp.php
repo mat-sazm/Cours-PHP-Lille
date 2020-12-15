@@ -76,5 +76,15 @@ $heros = [
     <p>Héros 2 : <?= $heros[1]['firstname'] ?> <?= $heros[1]['lastname'] ?> dit: Je suis <?= $heros[1]['name'] ?>, je protège <?= $heros[1]['city'] ?> et ses habitants !</p>
     <p>Héros 3 : <?= $heros[2]['firstname'] ?> <?= $heros[2]['lastname'] ?> dit: Je suis <?= $heros[2]['name'] ?>, je protège <?= $heros[2]['city'] ?> et ses habitants !</p>
     
+    <h3>Avec la boucle FOR</h3>
+    <?php for ($i = 0; $i < count($heros); $i++): ?>
+        <p>Héros <?= ($i + 1) ?> : <?= $heros[$i]['firstname'] ?> <?= $heros[$i]['lastname'] ?> dit: Je suis <?= $heros[$i]['name'] ?>, je protège <?= $heros[$i]['city'] ?> et ses habitants !</p>
+    <?php endfor; ?>
+
+    <h3>Avec la boucle FOREACH</h3>
+    <?php foreach ($heros as $key => $hero): ?>
+        <p>Héros <?= ($key + 1) ?> : <?= $hero['firstname'] ?> <?= $hero['lastname'] ?> dit: Je suis <?= $hero['name'] ?>, je protège <?= $hero['city'] ?> et ses habitants !</p>
+    <?php endforeach; ?>
+
 </body>
 </html>
