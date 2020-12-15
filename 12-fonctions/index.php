@@ -128,7 +128,105 @@ $title = "12 - Fonctions";
     <?= myAwasomeFnc("AAA") ?><br>
 
     <hr>
-    
+
+
+    <h2>Typage des fonctions</h2>
+
+    <pre>function nomDeLaFnc():type { /* code à executer */ }</pre>
+
+    <?php
+    // Cette fonction retourne une chaine de caractères
+    function myFnc_1(): string
+    {
+        // Intructions...
+        return "Chaine...";
+    }
+
+    // Cette fonction retourne un entier
+    function myFnc_2(): int
+    {
+        // Intructions...
+        return 42;
+    }
+
+    // Cette fonction retourne un Booleen
+    function myFnc_3(): bool
+    {
+        // Intructions...
+        return true;
+    }
+
+    // Cette fonction retourne un tableau
+    function myFnc_4(): array
+    {
+        // Intructions...
+        return [];
+    }
+
+    // Cette fonction retourne un object
+    function myFnc_5(): object
+    {
+        // Intructions...
+        return (object) [];
+    }
+    ?>
+
+    <hr>
+
+
+    <h2>Typage des paramètres</h2>
+
+    <pre>function nomDeLaFnc( string $param = "default" ) { /* code à executer */ }</pre>
+    <pre>function nomDeLaFnc( string? $param = null ) { /* code à executer */ }</pre>
+
+    <?php
+    function myFnc_6( string $number ): int
+    {
+        return +$number;
+    }
+    myFnc_6( "42" );
+
+    ?>
+
+
+    <hr>
+
+    <h2>Documenté une fonction</h2>
+
+
+    <?php
+
+    /**
+     * Undocumented function
+     *
+     * @param string $number chaine du nombre a mettre en entré
+     * @return integer
+     */
+    function myFnc_7( string $number ): int
+    {
+        return +$number;
+    }
+    ?>
+
+
+    <hr>
+
+    <h2>Definition de l'existance d'une fonction</h2>
+
+
+    <?php
+    if ( !function_exists("myFnc_7") )
+    {
+        function myFnc_7( string $number ): int
+        {
+            return +$number;
+        }
+    }
+    ?>
+
+
+    <hr>
+
     <a href="/">Retour</a>
 </body>
 </html>
