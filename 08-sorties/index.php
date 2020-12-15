@@ -43,7 +43,7 @@ $title = "08 - Sorties";
     <?php print($d) ?><br>
     <?php print($e) ?><br>
 
-    <?php if(print($a)){/* ... */} ?><br>
+    <?php var_dump(print($a)) ?><br>
 
 
 
