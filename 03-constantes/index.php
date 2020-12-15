@@ -52,6 +52,28 @@ $title = "03 - Constantes";
 
     <hr>
 
+
+    <h2>Définir l'existance d'un constante</h2>
+
+    <p>La constante <code>MA_CONSTANTE_2</code> n'esxiste pas, PHP génère un Warning et retourne le nom de la constante</p>
+    <?= MA_CONSTANTE_2 ?>
+
+
+    <p>Test l'existance de la constante <code>MA_CONSTANTE_3</code></p>
+
+    <?php
+    if ( defined("MA_CONSTANTE_3") )
+    {
+        var_dump(MA_CONSTANTE_3);
+    }
+    else{
+        echo "La constante MA_CONSTANTE_3 n'est pas definie.";
+    }
+    ?>
+
+    <hr>
+
+
     <a href="/">Retour</a>
 </body>
 </html>

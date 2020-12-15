@@ -1,4 +1,10 @@
 <?php
+
+// On force l'affichage des messages d'erreurs
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 $title = "02 - Variables";
 ?>
 <!DOCTYPE html>
@@ -62,6 +68,29 @@ $title = "02 - Variables";
     <?php 
     $simpleQuote = 'Texte entre simple quote. voir la variable $d'; 
     echo $simpleQuote;
+    ?>
+
+    <hr>
+
+    <h2>Définir l'existance d'une variable</h2>
+
+    <p>La variable <code>$aa</code> n'existe pas, PHP génère une Notice et retourne <code>NULL</code></p>
+    <?php 
+    var_dump( $aa );
+    ?>
+
+    <br>
+
+    <p>On test l'existance de la variable <code>$bb</code></p>
+    <?php
+
+    if ( isset( $bb ) )
+    {
+        var_dump( $bb );
+    }
+    else {
+        echo "La variable \$bb n'existe pas.";
+    }
     ?>
 
     <hr>
