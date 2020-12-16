@@ -31,17 +31,9 @@ $month_text = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Aout"
 
     <pre style="background-color: #C0C0C0; padding: 15px; color: #000000">Method HTTP : <?= $_SERVER['REQUEST_METHOD'] ?>
 
-
-$_GET :
-<?php print_r($_GET) ?>
-
-
 $_POST :
 <?php print_r($_POST) ?>
-
 </pre>
-
-
 
 
     <hr>
@@ -74,14 +66,6 @@ $_POST :
                 <?php endfor; ?>
             </select>
 
-            <!--
-            <select name="birthday[month]">
-                <option value="">Mois</option>
-                <?php for ($i=1; $i<=12; $i++): ?>
-                <option value="<?= $i ?>"><?= $month_text[$i-1] ?></option>
-                <?php endfor; ?>
-            </select>
-            -->
             <select name="birthday[month]">
                 <option value="">Mois</option>
                 <?php foreach ($month_text as $key => $value): ?>
