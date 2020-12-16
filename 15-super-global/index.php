@@ -7,6 +7,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 $title = "15 - Supers Globales";
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +25,6 @@ $title = "15 - Supers Globales";
     <h2>$_SERVER</h2>
     <p>Contient les informations du serveur qui execute le script</p>
     <pre><?php print_r( $_SERVER ) ?></pre>
-
 
     <h2>$_REQUEST</h2>
     <p>Contient les informations de la requête</p>
