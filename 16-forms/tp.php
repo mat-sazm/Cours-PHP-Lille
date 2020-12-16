@@ -55,14 +55,20 @@ $_POST :
         <!-- Birthday -->
         <div>
             <label for="birthday">Birthday</label>
+
             <select name="birthday[day]" id="birthday">
-
+                <option value="">Jour</option>
+                <?php for ($i=1; $i<=31; $i++): ?>
+                <option value="<?= $i ?>"><?= $i ?></option>
+                <?php endfor; ?>
             </select>
+
             <select name="birthday[month]">
-
+                <option value="">Mois</option>
             </select>
-            <select name="birthday[year]">
 
+            <select name="birthday[year]">
+                <option value="">Année</option>
             </select>
         </div>
 
