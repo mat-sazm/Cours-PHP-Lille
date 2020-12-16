@@ -65,10 +65,13 @@ $_POST :
 
             <select name="birthday[month]">
                 <option value="">Mois</option>
+                <option value="1">Janvier</option>
             </select>
 
             <select name="birthday[year]">
                 <option value="">Année</option>
+                <option value="2020">2020</option>
+                <option value="1920">1920</option>
             </select>
         </div>
 
