@@ -9,6 +9,14 @@
 // - Password
 // - Password Confirmation
 
+// On force l'affichage des messages d'erreurs
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+// Déclaration de la liste des mois
+$month_text = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Aout","Septembre","Octobre","Novembre","Décembre"];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,7 +38,10 @@ $_GET :
 
 $_POST :
 <?php print_r($_POST) ?>
+
 </pre>
+
+
 
 
     <hr>
@@ -63,15 +74,26 @@ $_POST :
                 <?php endfor; ?>
             </select>
 
+            <!--
             <select name="birthday[month]">
                 <option value="">Mois</option>
-                <option value="1">Janvier</option>
+                <?php for ($i=1; $i<=12; $i++): ?>
+                <option value="<?= $i ?>"><?= $month_text[$i-1] ?></option>
+                <?php endfor; ?>
+            </select>
+            -->
+            <select name="birthday[month]">
+                <option value="">Mois</option>
+                <?php foreach ($month_text as $key => $value): ?>
+                <option value="<?= ($key+1) ?>"><?= $value ?></option>
+                <?php endforeach; ?>
             </select>
 
             <select name="birthday[year]">
                 <option value="">Année</option>
-                <option value="2020">2020</option>
-                <option value="1920">1920</option>
+                <?php for ($i=date("Y"); $i>=date("Y")-100; $i--): ?>
+                <option value="<?= $i ?>"><?= $i ?></option>
+                <?php endfor; ?>
             </select>
         </div>
 
