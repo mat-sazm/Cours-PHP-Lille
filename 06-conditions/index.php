@@ -106,6 +106,43 @@ $title = "06 - Conditions";
         }
         ?>
     </section>
+
+    <hr>
+
+    <h2>Opérateur Ternaire</h2>
+
+    <pre>condition ? true : false</pre>
+
+    <?php
+
+        $color = "blue";
+        echo ($color == "red") ? "Oui c'est rouge" : "Non pas rouge";
+
+    ?>
+
+    <br>
+
+    <?php
+
+        $a = false;
+
+        if ($a)
+        {
+            $b = "A est vrai";
+        }
+        else 
+        {
+            $b = "A est faux";
+        }
+
+        echo "B dit : ".$b."<br>";
+
+
+        $c = $a ? "A est vrai" : "A est faux";
+        echo "C dit : ".$c."<br>";
+
+    ?>
+
     <hr>
 
     <a href="/">Retour</a>

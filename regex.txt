@@ -1,0 +1,3 @@
+motif_ouverture pattern motif_fermeture flag
+
+/regex/ig
