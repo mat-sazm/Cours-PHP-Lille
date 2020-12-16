@@ -47,7 +47,7 @@ $_POST :
     <hr>
 
 
-    <form method="get">
+    <form method="get" novalidate>
 
         <!-- Firstname -->
         <div>
