@@ -21,9 +21,11 @@ $month_text = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Aout"
 $firstname = null;
 $lastname = null;
 $birthday = null;
+$age = 0;
 $email = null;
 $plain_password = null;
 $confirm_password = null;
+$isAgreeTerms = false;
 
 // Controle du formulaire
 if ( $_SERVER['REQUEST_METHOD'] === "POST" )
@@ -42,12 +44,23 @@ if ( $_SERVER['REQUEST_METHOD'] === "POST" )
     $birth_month = $_POST['birthday']['month'] ?? null;
     $birth_year = $_POST['birthday']['year'] ?? null;
 
+    // Calucul de l'age
+    $d1 = new DateTime( "$birth_year-$birth_month-$birth_day 00:00:00" );
+    $d2 = new DateTime( date("Y-m-d H:i:s") );
+    $diff = $d2->diff($d1);
+    $age = $diff->y;
+
+    // $birthday = "$birth_year-$birth_month-$birth_day";
+
     // Recup de l'email
     $email = $_POST['email'] ?? null;
 
     // Recup de MDP
     $plain_password = $_POST['password'] ?? null;
     $confirm_password = $_POST['confirmation'] ?? null;
+
+    // Recup de Agree Terms
+    $isAgreeTerms = isset($_POST['agreeTerms']) ? true : false;
 
 
 
@@ -69,6 +82,17 @@ if ( $_SERVER['REQUEST_METHOD'] === "POST" )
 
     // Birthday : doit etre une date valide dans le passé + Min 21 ans
 
+    // Validité de la date
+    if (!checkdate($birth_month, $birth_day, $birth_year))
+    {
+        echo "Date invalide<br>";
+    }
+    else if ($age < 13)
+    {
+        echo "Trop jeune !<br>";
+    }
+
+
     // Email : Syntaxe email et valeur obligatoire
     if (!filter_var($email, FILTER_VALIDATE_EMAIL))
     {
@@ -88,6 +112,10 @@ if ( $_SERVER['REQUEST_METHOD'] === "POST" )
     }
 
     // Agree Terms : Obligatoire
+    if (!$isAgreeTerms)
+    {
+        echo "Vous devez accepter les CGU<br>";
+    }
 
 }
 
@@ -105,18 +133,6 @@ if ( $_SERVER['REQUEST_METHOD'] === "POST" )
 
     <pre style="background-color: #C0C0C0; padding: 15px; color: #000000">Method HTTP : <?= $_SERVER['REQUEST_METHOD'] ?>
 
-
-
-    <?php
-    if ( $_SERVER['REQUEST_METHOD'] === "POST" )
-    {
-        echo "Traite les données et affiche du form";
-    }
-    else
-    {
-        echo "Affiche uniquement le form";
-    }
-    ?>
 
 $_POST :
 <?php print_r($_POST) ?>
@@ -147,21 +163,21 @@ $_POST :
             <label for="birthday">Birthday</label>
 
             <select name="birthday[day]" id="birthday">
-                <option value="">Jour</option>
+                <option value="0">Jour</option>
                 <?php for ($i=1; $i<=31; $i++): ?>
                 <option value="<?= $i ?>"><?= $i ?></option>
                 <?php endfor; ?>
             </select>
 
             <select name="birthday[month]">
-                <option value="">Mois</option>
+                <option value="0">Mois</option>
                 <?php foreach ($month_text as $key => $value): ?>
                 <option value="<?= ($key+1) ?>"><?= $value ?></option>
                 <?php endforeach; ?>
             </select>
 
             <select name="birthday[year]">
-                <option value="">Année</option>
+                <option value="0">Année</option>
                 <?php for ($i=date("Y"); $i>=date("Y")-100; $i--): ?>
                 <option value="<?= $i ?>"><?= $i ?></option>
                 <?php endfor; ?>
