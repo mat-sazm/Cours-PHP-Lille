@@ -93,7 +93,7 @@ if ( $_SERVER['REQUEST_METHOD'] === "POST" )
     if (!preg_match("/^[a-z-]{2,}$/i", $lastname))
     {
         $isValid = false;
-        echo "Erreur sur le champ Lastname<br>";
+        $errors['lastname'] = "Erreur sur le champ Lastname";
     }
 
     // Birthday : doit etre une date valide dans le passé + Min 21 ans
@@ -102,12 +102,12 @@ if ( $_SERVER['REQUEST_METHOD'] === "POST" )
     if (!checkdate($birth_month, $birth_day, $birth_year))
     {
         $isValid = false;
-        echo "Date invalide<br>";
+        $errors['birthday'] = "Date invalide";
     }
     else if ($age < 13)
     {
         $isValid = false;
-        echo "Trop jeune !<br>";
+        $errors['birthday'] = "Trop jeune !";
     }
 
 
@@ -115,28 +115,28 @@ if ( $_SERVER['REQUEST_METHOD'] === "POST" )
     if (!filter_var($email, FILTER_VALIDATE_EMAIL))
     {
         $isValid = false;
-        echo "Erreur sur le champ Email<br>";
+        $errors['email'] = "Email invalide";
     }
 
     // Password : min 4 caractères, 1 alpha + 1 numerique
     if (strlen($plain_password) < 4)
     {
         $isValid = false;
-        echo "Erreur sur le champ Mot de passe<br>";
+        $errors['password'] = "Mot de passe invalide";
     }
 
     // Password Confirmation : doit etre identique à password
     if ($confirm_password != $plain_password)
     {
         $isValid = false;
-        echo "Les mots de passe ne correspondent pas<br>";
+        $errors['confirmation'] = "Les mots de passe ne correspondent pas";
     }
 
     // Agree Terms : Obligatoire
     if (!$isAgreeTerms)
     {
         $isValid = false;
-        echo "Vous devez accepter les CGU<br>";
+        $errors['agreeTerms'] = "Vous devez accepter les CGU";
     }
 
 
@@ -156,6 +156,8 @@ if ( $_SERVER['REQUEST_METHOD'] === "POST" )
     //     echo "ERREUR SUR LE FORM";
     // }
 
+    header("location: ".$_SERVER['HTTP_REFERER']);
+    exit;
 }
 
 ?>
@@ -169,6 +171,15 @@ if ( $_SERVER['REQUEST_METHOD'] === "POST" )
 <body>
     
     <h1>TP Formulaires</h1>
+
+
+
+    <?php
+    if ($_SERVER['REQUEST_METHOD'] === "GET")
+    {
+        var_dump( $errors );
+    }
+    ?>
 
     <pre style="background-color: #C0C0C0; padding: 15px; color: #000000">Method HTTP : <?= $_SERVER['REQUEST_METHOD'] ?>
 
@@ -198,6 +209,9 @@ $_POST :
         <div>
             <label for="lastname">Lastname</label>
             <input type="text" name="lastname" id="lastname" value="<?= $lastname ?>">
+            <?php if (isset($errors['lastname'])): ?>
+                <p class="has-error"><?= $errors['lastname'] ?></p>
+            <?php endif; ?>
         </div>
 
 
@@ -227,13 +241,20 @@ $_POST :
                 <option value="<?= $i ?>" <?= $birth_year == $i ? "selected" : null ?>><?= $i ?></option>
                 <?php endfor; ?>
             </select>
+
+            <?php if (isset($errors['birthday'])): ?>
+                <p class="has-error"><?= $errors['birthday'] ?></p>
+            <?php endif; ?>
         </div>
 
 
         <!-- Email -->
         <div>
             <label for="email">Email</label>
-            <input type="email" name="email" id="email">
+            <input type="email" name="email" id="email" value="<?= $email ?>">
+            <?php if (isset($errors['email'])): ?>
+                <p class="has-error"><?= $errors['email'] ?></p>
+            <?php endif; ?>
         </div>
 
 
@@ -241,6 +262,9 @@ $_POST :
         <div>
             <label for="password">Password</label>
             <input type="password" name="password" id="password">
+            <?php if (isset($errors['password'])): ?>
+                <p class="has-error"><?= $errors['password'] ?></p>
+            <?php endif; ?>
         </div>
 
 
@@ -248,6 +272,9 @@ $_POST :
         <div>
             <label for="confirmation">Password Confirmation</label>
             <input type="password" name="confirmation" id="confirmation">
+            <?php if (isset($errors['confirmation'])): ?>
+                <p class="has-error"><?= $errors['confirmation'] ?></p>
+            <?php endif; ?>
         </div>
 
 
@@ -257,6 +284,9 @@ $_POST :
                 <input type="checkbox" name="agreeTerms">
                 I agree with terms.
             </label>
+            <?php if (isset($errors['agreeTerms'])): ?>
+                <p class="has-error"><?= $errors['agreeTerms'] ?></p>
+            <?php endif; ?>
         </div>
 
 
