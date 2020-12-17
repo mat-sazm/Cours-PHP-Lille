@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 
 // On force l'affichage des messages d'erreurs
 ini_set('display_errors', 1);
@@ -21,6 +21,9 @@ $month_text = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Aout"
 
 // Définition du tableau d'erreurs
 $errors = [];
+// $_SESSION['errors'] = "Yop...";
+// unset($_SESSION['errors']);
+// session_destroy();
 
 
 $firstname = null;
@@ -39,6 +42,7 @@ $isAgreeTerms = false;
 if ( $_SERVER['REQUEST_METHOD'] === "POST" )
 {
     $isValid = true;
+    $_SESSION["data"] = [];
 
 
     // 1. Recup des données
@@ -46,14 +50,19 @@ if ( $_SERVER['REQUEST_METHOD'] === "POST" )
 
     // Recup du Firstname
     $firstname = isset($_POST['firstname']) ? $_POST['firstname'] : null;
+    $_SESSION['data']['firstname'] = $firstname;
 
     // Recup du Lastname
     $lastname = $_POST['lastname'] ?? null;
+    $_SESSION['data']['lastname'] = $lastname;
 
     // Recup de la date anniversaire
     $birth_day = $_POST['birthday']['day'] ?? 0;
     $birth_month = $_POST['birthday']['month'] ?? 0;
     $birth_year = $_POST['birthday']['year'] ?? 0;
+    $_SESSION['data']['birth_day'] = $birth_day;
+    $_SESSION['data']['birth_month'] = $birth_month;
+    $_SESSION['data']['birth_year'] = $birth_year;
 
     // Calucul de l'age
     $d1 = new DateTime( "$birth_year-$birth_month-$birth_day 00:00:00" );
@@ -65,6 +74,7 @@ if ( $_SERVER['REQUEST_METHOD'] === "POST" )
 
     // Recup de l'email
     $email = $_POST['email'] ?? null;
+    $_SESSION['data']['email'] = $email;
 
     // Recup de MDP
     $plain_password = $_POST['password'] ?? null;
@@ -151,12 +161,11 @@ if ( $_SERVER['REQUEST_METHOD'] === "POST" )
 
         exit;
     }
-    else
-    {
-        // Mettre les erreur en Session
-        // echo "ERREUR SUR LE FORM";
-    }
 
+    $_SESSION['errors'] = $errors;
+
+    // Redirige l'utilisateur pour eviter un nouvel envois du formulaire 
+    // au rafraichissement de la page
     header("location: ".$_SERVER['HTTP_REFERER']);
     exit;
 }
@@ -174,19 +183,14 @@ if ( $_SERVER['REQUEST_METHOD'] === "POST" )
     <h1>TP Formulaires</h1>
 
 
-
-    <?php
-    // if ($_SERVER['REQUEST_METHOD'] === "GET")
-    // {
-    //     var_dump( $errors );
-    // }
-    ?>
-
     <pre style="background-color: #C0C0C0; padding: 15px; color: #000000">Method HTTP : <?= $_SERVER['REQUEST_METHOD'] ?>
 
 
 $errors :
 <?php print_r($errors) ?>
+
+$_SESSION['errors'] :
+<?php print_r($_SESSION['errors']) ?>
 
 $_POST :
 <?php print_r($_POST) ?>
@@ -199,11 +203,16 @@ $_POST :
         <!-- Firstname -->
         <div>
             <label for="firstname">Firstname</label>
-            <input type="text" name="firstname" id="firstname" value="<?= $firstname ?>">
+            <input 
+                type="text" 
+                name="firstname" 
+                id="firstname" 
+                value="<?= isset($_SESSION['data']['firstname']) ? $_SESSION['data']['firstname'] : null ?>"
+            >
             <?php 
             // Afficher les erreurs de la session
-            if (isset($errors['firstname'])): ?>
-                <p class="has-error"><?= $errors['firstname'] ?></p>
+            if (isset($_SESSION['errors']['firstname'])): ?>
+                <p class="has-error"><?= $_SESSION['errors']['firstname'] ?></p>
             <?php endif; ?>
         </div>
 
@@ -211,9 +220,9 @@ $_POST :
         <!-- Lastname -->
         <div>
             <label for="lastname">Lastname</label>
-            <input type="text" name="lastname" id="lastname" value="<?= $lastname ?>">
-            <?php if (isset($errors['lastname'])): ?>
-                <p class="has-error"><?= $errors['lastname'] ?></p>
+            <input type="text" name="lastname" id="lastname" value="<?= isset($_SESSION['data']['lastname']) ? $_SESSION['data']['lastname'] : null ?>">
+            <?php if (isset($_SESSION['errors']['lastname'])): ?>
+                <p class="has-error"><?= $_SESSION['errors']['lastname'] ?></p>
             <?php endif; ?>
         </div>
 
@@ -225,7 +234,9 @@ $_POST :
             <select name="birthday[day]" id="birthday">
                 <option value="0">Jour</option>
                 <?php for ($i=1; $i<=31; $i++): ?>
-                <option value="<?= $i ?>" <?= $birth_day == $i ? "selected" : null ?>>
+                <option value="<?= $i ?>" 
+                    <?= isset($_SESSION['data']['birth_day']) ? ( $_SESSION['data']['birth_day'] == $i ? "selected" : null ) : null ?>
+                >
                     <?= $i ?>
                 </option>
                 <?php endfor; ?>
@@ -234,19 +245,33 @@ $_POST :
             <select name="birthday[month]">
                 <option value="0">Mois</option>
                 <?php foreach ($month_text as $key => $value): ?>
-                <option value="<?= ($key+1) ?>" <?= $birth_month == $key+1 ? "selected" : null ?>><?= $value ?></option>
+                <option value="<?= ($key+1) ?>" <?php
+                    if (isset($_SESSION['data']['birth_month']))
+                    {
+                        if ($_SESSION['data']['birth_month'] == $key+1)
+                        {
+                            echo "selected";
+                        }
+                    }
+                ?>><?= $value ?></option>
                 <?php endforeach; ?>
             </select>
 
             <select name="birthday[year]">
                 <option value="0">Année</option>
                 <?php for ($i=date("Y"); $i>=date("Y")-100; $i--): ?>
-                <option value="<?= $i ?>" <?= $birth_year == $i ? "selected" : null ?>><?= $i ?></option>
+                <option value="<?= $i ?>" <?php
+                    if (isset($_SESSION['data']['birth_year']) && $_SESSION['data']['birth_year'] == $i)
+                    // if ($_SESSION['data']['birth_year'] == $i && isset($_SESSION['data']['birth_year']) )
+                    {
+                        echo "selected";
+                    }
+                ?>><?= $i ?></option>
                 <?php endfor; ?>
             </select>
 
-            <?php if (isset($errors['birthday'])): ?>
-                <p class="has-error"><?= $errors['birthday'] ?></p>
+            <?php if (isset($_SESSION['errors']['birthday'])): ?>
+                <p class="has-error"><?= $_SESSION['errors']['birthday'] ?></p>
             <?php endif; ?>
         </div>
 
@@ -254,9 +279,9 @@ $_POST :
         <!-- Email -->
         <div>
             <label for="email">Email</label>
-            <input type="email" name="email" id="email" value="<?= $email ?>">
-            <?php if (isset($errors['email'])): ?>
-                <p class="has-error"><?= $errors['email'] ?></p>
+            <input type="email" name="email" id="email" value="<?= isset($_SESSION['data']['email']) ? $_SESSION['data']['email'] : null ?>">
+            <?php if (isset($_SESSION['errors']['email'])): ?>
+                <p class="has-error"><?= $_SESSION['errors']['email'] ?></p>
             <?php endif; ?>
         </div>
 
@@ -265,8 +290,8 @@ $_POST :
         <div>
             <label for="password">Password</label>
             <input type="password" name="password" id="password">
-            <?php if (isset($errors['password'])): ?>
-                <p class="has-error"><?= $errors['password'] ?></p>
+            <?php if (isset($_SESSION['errors']['password'])): ?>
+                <p class="has-error"><?= $_SESSION['errors']['password'] ?></p>
             <?php endif; ?>
         </div>
 
@@ -275,8 +300,8 @@ $_POST :
         <div>
             <label for="confirmation">Password Confirmation</label>
             <input type="password" name="confirmation" id="confirmation">
-            <?php if (isset($errors['confirmation'])): ?>
-                <p class="has-error"><?= $errors['confirmation'] ?></p>
+            <?php if (isset($_SESSION['errors']['confirmation'])): ?>
+                <p class="has-error"><?= $_SESSION['errors']['confirmation'] ?></p>
             <?php endif; ?>
         </div>
 
@@ -287,8 +312,8 @@ $_POST :
                 <input type="checkbox" name="agreeTerms">
                 I agree with terms.
             </label>
-            <?php if (isset($errors['agreeTerms'])): ?>
-                <p class="has-error"><?= $errors['agreeTerms'] ?></p>
+            <?php if (isset($_SESSION['errors']['agreeTerms'])): ?>
+                <p class="has-error"><?= $_SESSION['errors']['agreeTerms'] ?></p>
             <?php endif; ?>
         </div>
 
@@ -299,6 +324,7 @@ $_POST :
 
 </body>
 </html>
-
 <?php
 // Reset des erreurs de session
+unset($_SESSION['data']);
+unset($_SESSION['errors']);
