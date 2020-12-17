@@ -175,10 +175,10 @@ if ( $_SERVER['REQUEST_METHOD'] === "POST" )
 
 
     <?php
-    if ($_SERVER['REQUEST_METHOD'] === "GET")
-    {
-        var_dump( $errors );
-    }
+    // if ($_SERVER['REQUEST_METHOD'] === "GET")
+    // {
+    //     var_dump( $errors );
+    // }
     ?>
 
     <pre style="background-color: #C0C0C0; padding: 15px; color: #000000">Method HTTP : <?= $_SERVER['REQUEST_METHOD'] ?>
