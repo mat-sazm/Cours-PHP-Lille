@@ -151,10 +151,11 @@ if ( $_SERVER['REQUEST_METHOD'] === "POST" )
 
         exit;
     }
-    // else
-    // {
-    //     echo "ERREUR SUR LE FORM";
-    // }
+    else
+    {
+        // Mettre les erreur en Session
+        // echo "ERREUR SUR LE FORM";
+    }
 
     header("location: ".$_SERVER['HTTP_REFERER']);
     exit;
@@ -199,7 +200,9 @@ $_POST :
         <div>
             <label for="firstname">Firstname</label>
             <input type="text" name="firstname" id="firstname" value="<?= $firstname ?>">
-            <?php if (isset($errors['firstname'])): ?>
+            <?php 
+            // Afficher les erreurs de la session
+            if (isset($errors['firstname'])): ?>
                 <p class="has-error"><?= $errors['firstname'] ?></p>
             <?php endif; ?>
         </div>
@@ -296,3 +299,6 @@ $_POST :
 
 </body>
 </html>
+
+<?php
+// Reset des erreurs de session
