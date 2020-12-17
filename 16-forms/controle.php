@@ -19,6 +19,9 @@ error_reporting(E_ALL);
 // Déclaration de la liste des mois
 $month_text = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Aout","Septembre","Octobre","Novembre","Décembre"];
 
+// Définition du tableau d'erreurs
+$errors = [];
+
 
 $firstname = null;
 $lastname = null;
@@ -65,6 +68,7 @@ if ( $_SERVER['REQUEST_METHOD'] === "POST" )
 
     // Recup de MDP
     $plain_password = $_POST['password'] ?? null;
+    $encoded_password = password_hash( $plain_password, PASSWORD_BCRYPT );
     $confirm_password = $_POST['confirmation'] ?? null;
 
     // Recup de Agree Terms
@@ -82,7 +86,7 @@ if ( $_SERVER['REQUEST_METHOD'] === "POST" )
     if (!preg_match("/^[a-z-]+$/i", $firstname))
     {
         $isValid = false;
-        echo "Erreur sur le champ Firstname<br>";
+        $errors['firstname'] = "Erreur sur le champ Firstname";
     }
 
     // Lastname : Chaine de caractères obligatoire (2 caractère minimum)
@@ -143,6 +147,8 @@ if ( $_SERVER['REQUEST_METHOD'] === "POST" )
     {
         echo "ENREGISTRE EN BDD";
 
+        // $encoded_password;
+
         exit;
     }
     // else
@@ -167,6 +173,9 @@ if ( $_SERVER['REQUEST_METHOD'] === "POST" )
     <pre style="background-color: #C0C0C0; padding: 15px; color: #000000">Method HTTP : <?= $_SERVER['REQUEST_METHOD'] ?>
 
 
+$errors :
+<?php print_r($errors) ?>
+
 $_POST :
 <?php print_r($_POST) ?>
 </pre>
@@ -181,6 +190,9 @@ $_POST :
         <div>
             <label for="firstname">Firstname</label>
             <input type="text" name="firstname" id="firstname" value="<?= $firstname ?>">
+            <?php if (isset($errors['firstname'])): ?>
+                <p class="has-error"><?= $errors['firstname'] ?></p>
+            <?php endif; ?>
         </div>
 
 
