@@ -21,6 +21,13 @@ $title = "20 - Session";
 
     <p>Démarre une session avec <code>session_start()</code></p>
 
+    <?php
+    // $_SESSION['user'] = [
+    //     'firstname' => "Bruce",
+    //     'lastname' => "WAYNE"
+    // ];
+    ?>
+    
     <pre><?php print_r( $_SESSION ) ?></pre>
 
     <?php
