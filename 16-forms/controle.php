@@ -23,6 +23,9 @@ $month_text = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Aout"
 $firstname = null;
 $lastname = null;
 $birthday = null;
+$birth_year = 0;
+$birth_month = 0;
+$birth_day = 0;
 $age = 0;
 $email = null;
 $plain_password = null;
@@ -45,9 +48,9 @@ if ( $_SERVER['REQUEST_METHOD'] === "POST" )
     $lastname = $_POST['lastname'] ?? null;
 
     // Recup de la date anniversaire
-    $birth_day = $_POST['birthday']['day'] ?? null;
-    $birth_month = $_POST['birthday']['month'] ?? null;
-    $birth_year = $_POST['birthday']['year'] ?? null;
+    $birth_day = $_POST['birthday']['day'] ?? 0;
+    $birth_month = $_POST['birthday']['month'] ?? 0;
+    $birth_year = $_POST['birthday']['year'] ?? 0;
 
     // Calucul de l'age
     $d1 = new DateTime( "$birth_year-$birth_month-$birth_day 00:00:00" );
@@ -195,21 +198,23 @@ $_POST :
             <select name="birthday[day]" id="birthday">
                 <option value="0">Jour</option>
                 <?php for ($i=1; $i<=31; $i++): ?>
-                <option value="<?= $i ?>"><?= $i ?></option>
+                <option value="<?= $i ?>" <?= $birth_day == $i ? "selected" : null ?>>
+                    <?= $i ?>
+                </option>
                 <?php endfor; ?>
             </select>
 
             <select name="birthday[month]">
                 <option value="0">Mois</option>
                 <?php foreach ($month_text as $key => $value): ?>
-                <option value="<?= ($key+1) ?>"><?= $value ?></option>
+                <option value="<?= ($key+1) ?>" <?= $birth_month == $key+1 ? "selected" : null ?>><?= $value ?></option>
                 <?php endforeach; ?>
             </select>
 
             <select name="birthday[year]">
                 <option value="0">Année</option>
                 <?php for ($i=date("Y"); $i>=date("Y")-100; $i--): ?>
-                <option value="<?= $i ?>"><?= $i ?></option>
+                <option value="<?= $i ?>" <?= $birth_year == $i ? "selected" : null ?>><?= $i ?></option>
                 <?php endfor; ?>
             </select>
         </div>
