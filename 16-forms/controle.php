@@ -1,5 +1,12 @@
 <?php
 
+
+// On force l'affichage des messages d'erreurs
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+
 // Creation d'un formulaire d'inscription utilisateur
 
 // - Firstname
@@ -8,11 +15,6 @@
 // - Email
 // - Password
 // - Password Confirmation
-
-// On force l'affichage des messages d'erreurs
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 
 // Déclaration de la liste des mois
 $month_text = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Aout","Septembre","Octobre","Novembre","Décembre"];
@@ -30,7 +32,10 @@ $isAgreeTerms = false;
 // Controle du formulaire
 if ( $_SERVER['REQUEST_METHOD'] === "POST" )
 {
-    // Recup des données
+    $isValid = true;
+
+
+    // 1. Recup des données
     // --
 
     // Recup du Firstname
@@ -64,19 +69,23 @@ if ( $_SERVER['REQUEST_METHOD'] === "POST" )
 
 
 
-    // Controle des données
+
+
+    // 2. Controle des données
     // --
 
     // Firstname : Chaine de caractères obligatoire
     // if (strlen($firstname) == 0)
     if (!preg_match("/^[a-z-]+$/i", $firstname))
     {
+        $isValid = false;
         echo "Erreur sur le champ Firstname<br>";
     }
 
     // Lastname : Chaine de caractères obligatoire (2 caractère minimum)
     if (!preg_match("/^[a-z-]{2,}$/i", $lastname))
     {
+        $isValid = false;
         echo "Erreur sur le champ Lastname<br>";
     }
 
@@ -85,10 +94,12 @@ if ( $_SERVER['REQUEST_METHOD'] === "POST" )
     // Validité de la date
     if (!checkdate($birth_month, $birth_day, $birth_year))
     {
+        $isValid = false;
         echo "Date invalide<br>";
     }
     else if ($age < 13)
     {
+        $isValid = false;
         echo "Trop jeune !<br>";
     }
 
@@ -96,26 +107,45 @@ if ( $_SERVER['REQUEST_METHOD'] === "POST" )
     // Email : Syntaxe email et valeur obligatoire
     if (!filter_var($email, FILTER_VALIDATE_EMAIL))
     {
+        $isValid = false;
         echo "Erreur sur le champ Email<br>";
     }
 
     // Password : min 4 caractères, 1 alpha + 1 numerique
-    if (!strlen($plain_password) >= 4)
+    if (strlen($plain_password) < 4)
     {
+        $isValid = false;
         echo "Erreur sur le champ Mot de passe<br>";
     }
 
     // Password Confirmation : doit etre identique à password
     if ($confirm_password != $plain_password)
     {
+        $isValid = false;
         echo "Les mots de passe ne correspondent pas<br>";
     }
 
     // Agree Terms : Obligatoire
     if (!$isAgreeTerms)
     {
+        $isValid = false;
         echo "Vous devez accepter les CGU<br>";
     }
+
+
+
+    // 3. Enregistre les données en BDD
+    // --
+    if ($isValid)
+    {
+        echo "ENREGISTRE EN BDD";
+
+        exit;
+    }
+    // else
+    // {
+    //     echo "ERREUR SUR LE FORM";
+    // }
 
 }
 
@@ -147,14 +177,14 @@ $_POST :
         <!-- Firstname -->
         <div>
             <label for="firstname">Firstname</label>
-            <input type="text" name="firstname" id="firstname">
+            <input type="text" name="firstname" id="firstname" value="<?= $firstname ?>">
         </div>
 
 
         <!-- Lastname -->
         <div>
             <label for="lastname">Lastname</label>
-            <input type="text" name="lastname" id="lastname">
+            <input type="text" name="lastname" id="lastname" value="<?= $lastname ?>">
         </div>
 
 
