@@ -180,9 +180,7 @@ $_POST :
 <?php print_r($_POST) ?>
 </pre>
 
-
     <hr>
-
 
     <form method="post" novalidate>
 
