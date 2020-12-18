@@ -106,6 +106,38 @@ $result = $query->fetch(PDO::FETCH_OBJ);
 
 
     <hr>
+    <hr>
+    <hr>
+
+    <h3>Requête préparée avec <code>bindParam()</code></h3>
+
+<pre>
+$id = 3;
+$sql = "SELECT `firstname`, `lastname`, `nickname` FROM `person` WHERE `id`= :id";
+$query = $pdo->prepare($sql);
+
+$query->bindParam(":id", $id);
+$query->execute();
+
+$result = $query->fetch(PDO::FETCH_OBJ);
+    </pre>
+
+    <h4>Resultat</h4>
+    <?php
+    $id = 3;
+    $sql = "SELECT `firstname`, `lastname`, `nickname` FROM `person` WHERE `id`= :id";
+    $query = $pdo->prepare($sql);
+
+    $query->bindParam(':id', $id, PDO::PARAM_INT);
+    $query->execute();
+
+    $result = $query->fetch(PDO::FETCH_OBJ);
+    ?>
+
+    <pre><?php print_r($result) ?></pre>
+
+
+    <hr>
     <a href="/">Retour</a>
 </body>
 </html>
