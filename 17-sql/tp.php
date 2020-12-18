@@ -74,7 +74,7 @@ $query->execute();
 
 $results = $query->fetchAll(PDO::FETCH_OBJ);
 
-$album_title = $results[0]->album_title
+$album_title = $results[0]->album_title ?? null;
 ?>
 
 <h2><?= $album_title ?></h2>
@@ -86,6 +86,5 @@ $album_title = $results[0]->album_title
 </ul>
 
 <hr>
-
 
 <pre><?php print_r($results) ?></pre>
