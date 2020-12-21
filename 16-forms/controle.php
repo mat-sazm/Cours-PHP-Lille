@@ -64,7 +64,7 @@ if ( $_SERVER['REQUEST_METHOD'] === "POST" )
     $_SESSION['data']['birth_month'] = $birth_month;
     $_SESSION['data']['birth_year'] = $birth_year;
 
-    // Calucul de l'age
+    // Calcul de l'age
     $d1 = new DateTime( "$birth_year-$birth_month-$birth_day 00:00:00" );
     $d2 = new DateTime( date("Y-m-d H:i:s") );
     $diff = $d2->diff($d1);

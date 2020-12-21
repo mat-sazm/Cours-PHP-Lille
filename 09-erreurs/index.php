@@ -17,6 +17,7 @@ $title = "09 - Niveaux d'erreurs";
 <body>
     <h1><?= $title ?></h1>
 
+
     <h2>Notice</h2>
 
     <p>Informe d'une erreur non problematique et continu l'execution du code.</p>

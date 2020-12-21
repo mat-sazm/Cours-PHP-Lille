@@ -105,6 +105,22 @@ $title = "02 - Variables";
     <pre><?php var_dump($d) ?></pre>
 
     <hr>
+
+    <pre>
+    $a = "hello";
+    $hello = "world";
+
+    echo $$a;
+    </pre>
+
+    <?php
+    $a = "hello";
+    $hello = "world";
+
+    echo $$a;
+    ?>
+
+    <hr>
     
     <a href="/">Retour</a>
 </body>
