@@ -1,4 +1,5 @@
 <?php
+
 // Si le formulaire es envoyé
 if ($_SERVER['REQUEST_METHOD'] === "POST")
 {
@@ -32,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST")
     if (!preg_match("/^[a-z-]+$/i", $firstname))
     {
         // $isValid = false;
-        $errors['fristname'] = "Le prénom est invalide";
+        $errors['firstname'] = "Le prénom est invalide";
     }
 
     // lastname
@@ -70,6 +71,12 @@ if ($_SERVER['REQUEST_METHOD'] === "POST")
         $errors['confirmation'] = "Les mots de passe ne correspondent pas";
     }
 
+    // Password Confirmation : doit etre identique à password
+    if (!$agreeTerms)
+    {
+        $errors['agreeTerms'] = "Vous devez accepter les CGU";
+    }
+
     
     // 3. Save data in DB
     // --
@@ -80,16 +87,8 @@ if ($_SERVER['REQUEST_METHOD'] === "POST")
         echo "Sava data";
         exit;
     }
-    else 
-    {
-        echo "<pre>";
-        print_r( $errors );
-        echo "</pre>";
-        exit;
-    }
     
     // 4. Redirect user
     // --
-
 
 }
