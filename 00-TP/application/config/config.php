@@ -18,3 +18,12 @@ $month_text = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Aout"
 
 // Current date
 $current_year = date("Y");
+
+
+// Database Config
+// --
+
+$db_host = "";
+
+
+include_once "config/db_connect.php";

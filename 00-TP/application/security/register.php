@@ -84,6 +84,9 @@ if ($_SERVER['REQUEST_METHOD'] === "POST")
     // if ($isValid)
     if (empty($errors))
     {
+        // INSERT INTO user (`firstname`,`lastname`,`screenname`,`birthday`,`email`,`password`) 
+        // VALUES ($firstname, $lastname, $screenname, $birthday, $email, $password)
+
         echo "Sava data";
         exit;
     }
