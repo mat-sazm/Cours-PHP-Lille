@@ -1,15 +1,16 @@
-<?php include_once "config/config.php" ?>
+<?php 
+include_once "config/config.php";
 
-<?php
 $firstname = null;
 $lastname = null;
 $birth_day = 0;
 $birth_month = 0;
 $birth_year = 0;
 $email = null;
+
+include_once SECURITY_REGISTER;
+include_once HEADER_PATH;
 ?>
-<?php include_once SECURITY_REGISTER ?>
-<?php include_once HEADER_PATH ?>
 <!-- ======================================================================= -->
 
 <h1>Inscription</h1>

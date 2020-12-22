@@ -11,7 +11,7 @@ $db_dsn.= "charset=". $db_charset .";";
 try {
     $pdo = new PDO($db_dsn, $db_user, $db_pass);
 
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    // $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch(PDOException $e) {
     echo "Echec de connexion : ". $e->getMessage();
     die();

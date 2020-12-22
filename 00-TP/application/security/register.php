@@ -90,7 +90,22 @@ if ($_SERVER['REQUEST_METHOD'] === "POST")
         $errors['agreeTerms'] = "Vous devez accepter les CGU";
     }
 
-    
+
+    // Teste l'existance de l'utilisateur en BDD
+    $sql = "SELECT id FROM user WHERE email=:email";
+    $query = $pdo->prepare($sql);
+    $query->bindParam(':email', $email, PDO::PARAM_STR);
+    $query->execute();
+
+    $users = $query->fetchAll(PDO::FETCH_OBJ);
+
+    if (!empty($users))
+    {
+        $errors['email'] = "L'adresse email est deja associée à un compte.";
+    }
+
+
+
     // 3. Save data in DB
     // --
 
@@ -118,19 +133,13 @@ if ($_SERVER['REQUEST_METHOD'] === "POST")
         // Execution de la requête
         $query->execute();
 
+        // Test la validité de la requete
         $id = $pdo->lastInsertId();
-
-        var_dump( $id );
-
-
-        // -----------------------
-
-
-        echo "Sava data";
-        exit;
+        if ($id > 0)
+        {
+            // Redirect to homepage
+            header("location: index.php");
+            exit;
+        }
     }
-    
-    // 4. Redirect user
-    // --
-
 }
