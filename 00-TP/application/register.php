@@ -2,6 +2,14 @@
 include_once "config/config.php";
 include_once "config/db_connect.php";
 
+// Check user session
+// On redirige l'utilisateur si celui-ci est deja identifié
+if (isset($_SESSION['user']))
+{
+    header("location: /profil.php");
+    exit;
+}
+
 $firstname = null;
 $lastname = null;
 $birth_day = 0;

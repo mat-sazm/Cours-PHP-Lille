@@ -40,12 +40,14 @@
                         <li class="nav-item">
                             <a class="nav-link" href="contact.php">Contact</a>
                         </li>
+
                         <li class="nav-item">
                             <a class="nav-link" href="register.php">Inscription</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="modal" data-target="#loginModal">Connexion</a>
                         </li>
+                        
                     </ul>
                 </div>
 

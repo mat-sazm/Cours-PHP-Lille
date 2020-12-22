@@ -1,3 +1,10 @@
+<?php
+// Si l'utilisateur est identifié On n'affiche pas le modal
+if (isset($_SESSION['user'])) 
+{
+    return;
+}
+?>
 <!-- Login Modal -->
 <form method="POST" action="security/login.php" class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
     aria-hidden="true">
