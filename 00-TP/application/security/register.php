@@ -84,8 +84,34 @@ if ($_SERVER['REQUEST_METHOD'] === "POST")
     // if ($isValid)
     if (empty($errors))
     {
-        // INSERT INTO user (`firstname`,`lastname`,`screenname`,`birthday`,`email`,`password`) 
-        // VALUES ($firstname, $lastname, $screenname, $birthday, $email, $password)
+        // Definition de la requete SQL
+        $sql = "INSERT INTO user 
+            (`firstname`,`lastname`,`screenname`,`birthday`,`email`,`password`) 
+        VALUES 
+            (:firstname, :lastname, :screenname, :birthday, :email, :password)
+        ";
+
+        // Preparation de la requete pour PDO
+        $query = $pdo->prepare($sql);
+
+        // Definition des paramètres de requete
+        $query->bindParam(':firstname', $firstname, PDO::PARAM_STR);
+        $query->bindParam(':lastname', $lastname, PDO::PARAM_STR);
+        $query->bindParam(':screenname', $screenname, PDO::PARAM_STR);
+        $query->bindParam(':birthday', $birthday);
+        $query->bindParam(':email', $email, PDO::PARAM_STR);
+        $query->bindParam(':password', $password, PDO::PARAM_STR);
+
+        // Execution de la requête
+        $query->execute();
+
+        $id = $pdo->lastInsertId();
+
+        var_dump( $id );
+
+
+        // -----------------------
+
 
         echo "Sava data";
         exit;
