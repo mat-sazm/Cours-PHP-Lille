@@ -41,13 +41,29 @@
                             <a class="nav-link" href="contact.php">Contact</a>
                         </li>
 
+
+                        <?php if (isset($_SESSION['user'])): ?>
+                            
+                        <!-- Menu user si utilisateur identifié -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="profil.php"><?= $_SESSION['user']->screenname ?></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="security/logout.php">Déconnexion</a>
+                        </li>
+
+                        <?php else: ?>
+
+                        <!-- Menu Inscription si utilisateur non identifié -->
                         <li class="nav-item">
                             <a class="nav-link" href="register.php">Inscription</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="modal" data-target="#loginModal">Connexion</a>
                         </li>
-                        
+
+                        <?php endif ?>
+
                     </ul>
                 </div>
 

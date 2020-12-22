@@ -1,12 +1,23 @@
-Page de profil
+<?php 
+include_once "config/config.php";
+include_once "config/db_connect.php";
 
-- Menu 
-    - Si non identifier
-        - Inscription
-        - connexion 
-    - Si identifié 
-        - Screenname 
-        - Deconnexion + faire page de deconnexion
+// Check user session
+// On redirige l'utilisateur si celui-ci n'est pas identifié
+if (!isset($_SESSION['user']))
+{
+    header("location: /register.php");
+    exit;
+}
 
-- Proteger la page de profil 
-    - si non identifié : redirection vers la homepage avec un message d'erreur
+include_once HEADER_PATH;
+?>
+<!-- ======================================================================= -->
+
+<h2>Profile</h2>
+
+<h4>Qui suis-je ?</h4>
+<p>je suis <?= $_SESSION['user']->screenname ?> !</p>
+
+<!-- ======================================================================= -->
+<?php include_once FOOTER_PATH ?>
