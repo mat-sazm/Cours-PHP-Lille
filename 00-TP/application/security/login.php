@@ -61,6 +61,15 @@ if ($_SERVER['REQUEST_METHOD'] === "POST")
                 'type' => "success",
                 'message' => "Bonjour $user->screenname"
             ];
+
+            // 6. Incremente le compteur de connexion
+            // --
+
+            $sql = "UPDATE user SET login_counter=login_counter+1 WHERE id=$user->id";
+            $query = $pdo->prepare($sql);
+
+            $query->bindParam(":id", $user->id, PDO::PARAM_INT);
+            $query->execute();
         }
 
         // Le mot de passe ne correspond pas
