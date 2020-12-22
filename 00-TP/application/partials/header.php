@@ -55,6 +55,16 @@
     </header>
     <!-- Fin Entete du site -->
 
+    <!-- Flash Message -->
+    <?php if (isset($_SESSION['flash'])): ?>
+    <div class="container">
+        <div class="alert alert-<?= $_SESSION['flash']['type'] ?>">
+            <?= $_SESSION['flash']['message'] ?>
+        </div>
+    </div>
+    <?php unset($_SESSION['flash']) ?>
+    <?php endif ?>
+    <!-- End Flash Message -->
 
     <!-- contenu du site -->
     <div class="main-content">

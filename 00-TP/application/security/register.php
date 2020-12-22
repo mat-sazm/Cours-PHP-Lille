@@ -137,6 +137,12 @@ if ($_SERVER['REQUEST_METHOD'] === "POST")
         $id = $pdo->lastInsertId();
         if ($id > 0)
         {
+            // Flash Message register success
+            $_SESSION['flash'] = [
+                'type' => "success",
+                'message' => "Félicitation $firstname, votre compte à été créé !"
+            ];
+
             // Redirect to homepage
             header("location: index.php");
             exit;

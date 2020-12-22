@@ -1,4 +1,6 @@
 <?php 
+session_start();
+
 
 // On force l'affichage des messages d'erreurs
 ini_set('display_errors', 1);
