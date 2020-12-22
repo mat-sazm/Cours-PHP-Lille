@@ -35,7 +35,7 @@
                             <a class="nav-link" href="index.php">Accueil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="nos-services.php">Nos Services</a>
+                            <a class="nav-link" href="releases.php">Albums</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="contact.php">Contact</a>
