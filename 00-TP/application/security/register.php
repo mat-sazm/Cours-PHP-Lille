@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST")
     $screenname = $firstname." ". strtoupper(substr($lastname, 0, 1)) .".";
 
     // Generate Password Hash
-    $cryted_password = password_hash($plain_password, PASSWORD_BCRYPT);
+    $crypted_password = password_hash($plain_password, PASSWORD_BCRYPT);
 
 
     // 2. Check form data
@@ -113,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST")
         $query->bindParam(':screenname', $screenname, PDO::PARAM_STR);
         $query->bindParam(':birthday', $birthday);
         $query->bindParam(':email', $email, PDO::PARAM_STR);
-        $query->bindParam(':password', $cryted_password, PDO::PARAM_STR);
+        $query->bindParam(':password', $crypted_password, PDO::PARAM_STR);
 
         // Execution de la requête
         $query->execute();
