@@ -25,6 +25,19 @@ if ($_SERVER['REQUEST_METHOD'] === "POST")
     $diff = $d2->diff($d1);
     $age = $diff->y;
 
+    // Generate the Birthday string
+    // SQL : XXXX-XX-XX
+    // $birthday = $birth_year."-".$birth_month."-".$birth_day;
+    $birthday = $birth_year . "-";
+    $birthday.= ($birth_month <= 9 ? "0".$birth_month : $birth_month) . "-";
+    $birthday.= ($birth_day <= 9 ? "0".$birth_day : $birth_day);
+
+    // Generate Screenname (ex: "John D.")
+    $screenname = $firstname." ". strtoupper(substr($lastname, 0, 1)) .".";
+
+    // Generate Password Hash
+    $cryted_password = password_hash($plain_password, PASSWORD_BCRYPT);
+
 
     // 2. Check form data
     // -- 
@@ -100,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST")
         $query->bindParam(':screenname', $screenname, PDO::PARAM_STR);
         $query->bindParam(':birthday', $birthday);
         $query->bindParam(':email', $email, PDO::PARAM_STR);
-        $query->bindParam(':password', $password, PDO::PARAM_STR);
+        $query->bindParam(':password', $cryted_password, PDO::PARAM_STR);
 
         // Execution de la requête
         $query->execute();
