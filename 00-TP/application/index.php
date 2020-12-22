@@ -1,5 +1,8 @@
-<?php include_once "config/config.php" ?>
-<?php include_once HEADER_PATH ?>
+<?php 
+include_once "config/config.php";
+include_once "config/db_connect.php";
+include_once HEADER_PATH
+?>
 <!-- ======================================================================= -->
 
 <h1>Accueil</h1>

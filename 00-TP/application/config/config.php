@@ -52,6 +52,3 @@ $db_port = "3306";
 
 // Definie le jeu de caractères utilisé pour les requêtes
 $db_charset = "utf8";
-
-
-include_once "config/db_connect.php";

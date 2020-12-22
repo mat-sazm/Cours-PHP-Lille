@@ -1,5 +1,6 @@
 <?php 
 include_once "config/config.php";
+include_once "config/db_connect.php";
 
 $firstname = null;
 $lastname = null;
@@ -104,7 +105,7 @@ include_once HEADER_PATH;
             <!-- password -->
             <div class="form-group">
                 <label class="sr-only" for="password">Mot de passe</label>
-                <input class="form-control <?= isset($errors['password']) ? "is-invalid" : null ?>" type="text" name="password" id="password" placeholder="Nouveau mot de passe" required>
+                <input class="form-control <?= isset($errors['password']) ? "is-invalid" : null ?>" type="password" name="password" id="password" placeholder="Nouveau mot de passe" required>
                 <?php if (isset($errors['password'])): ?>
                 <div class="invalid-feedback"><?= $errors['password'] ?></div>
                 <?php endif ?>

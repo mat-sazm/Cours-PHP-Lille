@@ -1,5 +1,5 @@
 <!-- Login Modal -->
-<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
+<form method="POST" action="security/login.php" class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -13,12 +13,22 @@
 
             </div>
             <div class="modal-body">
-                ...
+                
+                <div class="form-group">
+                    <label for="login" class="sr-only">Login</label>
+                    <input class="form-control" type="text" name="login" id="login" placeholder="Login">
+                </div>
+                
+                <div class="form-group">
+                    <label for="password" class="sr-only">Password</label>
+                    <input class="form-control" type="password" name="password" id="password" placeholder="Password">
+                </div>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="submit" class="btn btn-primary">Login</button>
             </div>
         </div>
     </div>
-</div><!-- End Login Modal -->
+</form><!-- End Login Modal -->
