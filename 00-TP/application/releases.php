@@ -78,7 +78,7 @@ include_once HEADER_PATH
                     $parenthese = true;
                     $name .= "(";
                 }
-                
+
                 $name .= $album->artist;
 
                 if ($parenthese)
