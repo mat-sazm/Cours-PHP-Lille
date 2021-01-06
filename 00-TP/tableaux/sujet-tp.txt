@@ -1,0 +1,5 @@
+Bob: 12 (123456), Francis: 53 (AZER), Bruce: 80 (azert), Clark: 28 (12HGFD)
+
+-> liste des personnages en PHP
+-> Créer le Hash du mot de passe
+-> Classe les personnages en ordre décroissant de l'age

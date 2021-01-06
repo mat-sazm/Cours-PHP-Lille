@@ -69,3 +69,5 @@ article
 - createdBy (l'auteur)
 - createdAt (date de creation)
 - publishedAt (date de publication)
+
+
