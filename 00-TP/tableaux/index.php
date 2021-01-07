@@ -58,3 +58,57 @@
 // 6. Comment trier un tableau en PHP ?
 // 7. Comment trier un tableau multidimentionnel en PHP ?
 // 8. Comment afficher un tableau en PHP ?
+
+
+// Bob: 12 (123456), Francis: 53 (AZER), Bruce: 80 (azert), Clark: 28 (12HGFD)
+
+// 1 - Créer un tableau
+$characters = [
+    // 0
+    [
+        'name' => "Bob",
+        'age' => 12,
+        'pwd' => "123456",
+        'hash' => null,
+    ],
+
+    // 1
+    [
+        'name' => "Francis",
+        'age' => 53,
+        'pwd' => "AZER",
+        'hash' => null,
+    ],
+
+    // 2
+    [
+        'name' => "Bruce",
+        'age' => 80,
+        'pwd' => "azert",
+        'hash' => null,
+    ],
+
+    // 3
+    [
+        'name' => "Clark",
+        'age' => 28,
+        'pwd' => "12HGFD",
+        'hash' => null,
+    ],
+];
+
+
+// 2 - Crypter le mot de passe... 
+foreach ($characters as $key => $character)
+{
+    $characters[$key]['hash'] = password_hash($character['pwd'], PASSWORD_BCRYPT);
+}
+
+
+// 3 - Appliquer le tri sur le tableau...
+$age = array_column($characters, 'age');
+array_multisort($age, SORT_DESC, $characters);
+
+echo "<pre>";
+print_r($characters);
+echo "</pre>";
